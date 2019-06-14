@@ -329,7 +329,7 @@ when HTTP_REQUEST {
 	array set path_arr {
 		azure_oms 			{/api/logs?api-version=2016-04-01}
 		aws_cw 				{/}
-		aws_s3 				{/BIGIP/logs/${day_date}/${date}.log}
+		aws_s3 				{/AWSLogs/459886260541/CloudTrail/eu-central-1/logs/${day_year}/${day_month}/${day_day}/${date}.log}
 		* 					{/}
 	}
 	# Keys: $analytics_solution
@@ -456,6 +456,9 @@ when HTTP_REQUEST {
 		azure_oms 		{}
 		aws_cw 			{}
 		aws_s3 			{set day_date [clock format [clock seconds] -format "%Y%m%d" -gmt true]
+              day_year [clock format [clock seconds] -format "%Y" -gmt true]
+              day_month [clock format [clock seconds] -format "%m" -gmt true]
+              day_day [clock format [clock seconds] -format "%d" -gmt true]
 	      binary scan [CRYPTO::hash -alg sha256 $final_msg] H* payload_hash}
 		* 				{}
 	}
