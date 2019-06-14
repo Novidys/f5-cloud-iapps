@@ -329,7 +329,7 @@ when HTTP_REQUEST {
 	array set path_arr {
 		azure_oms 			{/api/logs?api-version=2016-04-01}
 		aws_cw 				{/}
-		aws_s3 				{/AWSLogs/459886260541/CloudTrail/eu-central-1/logs/${day_year}/${day_month}/${day_day}/${date}.log}
+		aws_s3 				{/AWSLogs/459886260541/CloudTrail/eu-central-1/${day_year}/${day_month}/${day_day}/${date}.log}
 		* 					{/}
 	}
 	# Keys: $analytics_solution
@@ -456,9 +456,9 @@ when HTTP_REQUEST {
 		azure_oms 		{}
 		aws_cw 			{}
 		aws_s3 			{set day_date [clock format [clock seconds] -format "%Y%m%d" -gmt true]
-              day_year [clock format [clock seconds] -format "%Y" -gmt true]
-              day_month [clock format [clock seconds] -format "%m" -gmt true]
-              day_day [clock format [clock seconds] -format "%d" -gmt true]
+              set day_year [clock format [clock seconds] -format "%Y" -gmt true]
+              set day_month [clock format [clock seconds] -format "%m" -gmt true]
+              set day_day [clock format [clock seconds] -format "%d" -gmt true]
 	      binary scan [CRYPTO::hash -alg sha256 $final_msg] H* payload_hash}
 		* 				{}
 	}
@@ -917,7 +917,7 @@ text {
     requires-bigip-version-max none
     requires-bigip-version-min 12.1
     requires-modules none
-    signing-key /Common/f5-irule
+    signing-key none
     tmpl-checksum none
-    tmpl-signature rgttJ32BNg3+d5KylMvKfEWlhClib1WtP1RtUO3doQBcewl3vP7323ODP1cIb6OrQM537N9xo4yyaLJinEzmlhzErcLYKyCZpR4ODVofPT66mLeziSpJoZn7s0vlYZ0tv09Es4aOj7cTx/An5v4xTVTahpXQnjXkgeVeiKi6CHVTA0cIlc53U/+LNGHiRc8FegC2pZlUkInyAzZu22du/ESzYz5tjHIsEDDWf9/P5RGvjnhogFN/AeFk71HjF4IkGUVZfy0UZOWaeGM2ezNW07x/ofvItduIPeIHrJEPZhFopGbCGKaS0I0s6GQ8GWtUrxOa/jAU40w7mR+T8lLNSA==
+    tmpl-signature none
 }
